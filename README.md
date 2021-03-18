@@ -1,1 +1,1 @@
-DR.Packages.MassTransit
+MassTransit Package to use a unified version of MassTransit across all services, tasks and applications
