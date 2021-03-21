@@ -1,9 +1,6 @@
 ﻿using MassTransit;
 using MassTransit.Definition;
 using MassTransit.ExtensionsDependencyInjectionIntegration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DR.Packages.MassTransit
 {

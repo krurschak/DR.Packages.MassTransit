@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DR.Packages.MassTransit
 {
-    interface ICommand : IMessage
+    public interface ICommand : IMessage
     {
         Guid OperationId { get; }
     }
