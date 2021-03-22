@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MassTransit;
+using System;
 using System.Linq;
 using System.Reflection;
 
@@ -9,15 +10,52 @@ namespace DR.Packages.MassTransit
     {
         public RabbitMqOptions()
         {
-            ApplicationName = Assembly.GetExecutingAssembly().EntryPoint.DeclaringType.Namespace;
+            ApplicationName = NewId.NextGuid().ToString();
         }
 
         public RabbitMqOptions(string connectionString)
         {
+            ReadConnectionString(connectionString);
+
+            if (string.IsNullOrEmpty(ApplicationName))
+            {
+                ApplicationName = NewId.NextGuid().ToString();
+            }
+        }
+
+        public RabbitMqOptions(string connectionString, string applicationName)
+        {
+            ReadConnectionString(connectionString);
+
+            if (string.IsNullOrEmpty(ApplicationName))
+            {
+                ApplicationName = applicationName;
+            }
+        }
+
+        public RabbitMqOptions(string connectionString, Assembly executingAssembly)
+        {
+            ReadConnectionString(connectionString);
+
+            if (string.IsNullOrEmpty(ApplicationName))
+            {
+                ApplicationName = executingAssembly.GetName().Name;
+            }
+        }
+
+        public string Host { get; set; } = "localhost";
+        public ushort Port { get; set; } = 5672;
+        public string VHost { get; set; } = "/";
+        public string Username { get; set; } = "guest";
+        public string Password { get; set; } = "guest";
+        public string ApplicationName { get; set; } = string.Empty;
+
+        private void ReadConnectionString(string connectionString)
+        {
             var parts = connectionString
-                .Split(';')
-                .Select(x => x.Trim())
-                .Where(x => !string.IsNullOrEmpty(x));
+                            .Split(';')
+                            .Select(x => x.Trim())
+                            .Where(x => !string.IsNullOrEmpty(x));
 
             foreach (var part in parts)
             {
@@ -34,18 +72,6 @@ namespace DR.Packages.MassTransit
                     }
                 }
             }
-
-            if (string.IsNullOrEmpty(ApplicationName))
-            {
-                ApplicationName = Assembly.GetExecutingAssembly().EntryPoint.DeclaringType.Namespace;
-            }
         }
-
-        public string Host { get; set; } = "localhost";
-        public ushort Port { get; set; } = 5672;
-        public string VHost { get; set; } = "/";
-        public string Username { get; set; } = "guest";
-        public string Password { get; set; } = "guest";
-        public string ApplicationName { get; set; } = string.Empty;
     }
 }
