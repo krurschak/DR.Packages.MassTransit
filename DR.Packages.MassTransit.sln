@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DR.Packages.MassTransit", "src\DR.Packages.MassTransit.csproj", "{DCA63E75-A718-464C-95A6-841C882253D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DR.Packages.MassTransit", "src\DR.Packages.MassTransit\DR.Packages.MassTransit.csproj", "{DCA63E75-A718-464C-95A6-841C882253D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
